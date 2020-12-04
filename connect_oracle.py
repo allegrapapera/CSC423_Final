@@ -110,3 +110,4 @@ if choice == 5:
     print(df.columns)
     # print(df['FIRST_NAME']) # example to extract a column
 
+cursor.close()
