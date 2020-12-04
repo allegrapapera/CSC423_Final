@@ -27,47 +27,86 @@ print("5. Display all HireAgreements for Mid-Size vehicles.\n")
 choice = int(input())
 
 if choice == 1:
+    print("\n")
     cursor.execute("""
         SELECT o.outletNo, s.staffNo, s.firstName, s.lastName, o.address
         FROM Outlets o, Staff s
         WHERE o.outletNo = s.outletNo;
      """)
-
+    # get column names from cursor
+    columns = [c[0] for c in cursor.description]
+    # fetch data
+    data = cursor.fetchall()
+    # bring data into a pandas dataframe for easy data transformation
+    df = pd.DataFrame(data, columns = columns)
+    print(df) # examine
+    print(df.columns)
+    # print(df['FIRST_NAME']) # example to extract a column
+    
 if choice == 2: 
     cursor.execute("""
         SELECT s.staffNo, s.firstName, s.lastName, s.jobTitle, o.address
         FROM Staff s, Outlets o
         WHERE o.outletNo = s.outletNo AND o.address = '310 E Grand Ave #103, El Segundo, CA 90245';
      """)
-
+    # get column names from cursor
+    columns = [c[0] for c in cursor.description]
+    # fetch data
+    data = cursor.fetchall()
+    # bring data into a pandas dataframe for easy data transformation
+    df = pd.DataFrame(data, columns = columns)
+    print(df) # examine
+    print(df.columns)
+    # print(df['FIRST_NAME']) # example to extract a column
+    
 if choice == 3:
+    print("\n")
     cursor.execute("""
         SELECT c.clientNo, c.firstName, c.lastName, c.phoneNo, h.hireNo
         FROM Clients c, HireAgreements h
         WHERE (c.address LIKE '%Beverly Hills, CA, 90210%') AND h.clientNo = c.clientNo;
      """)
+    # get column names from cursor
+    columns = [c[0] for c in cursor.description]
+    # fetch data
+    data = cursor.fetchall()
+    # bring data into a pandas dataframe for easy data transformation
+    df = pd.DataFrame(data, columns = columns)
+    print(df) # examine
+    print(df.columns)
+    # print(df['FIRST_NAME']) # example to extract a column    
 
 if choice == 4:
+    print("\n")
     cursor.execute("""
         SELECT c.firstName, c.lastName, c.phoneNo, h.endMileage
         FROM Clients c, HireAgreements h
         WHERE (h.endMileage < 20000) AND (c.clientNo = h.clientNo);
     """)
-
+    # get column names from cursor
+    columns = [c[0] for c in cursor.description]
+    # fetch data
+    data = cursor.fetchall()
+    # bring data into a pandas dataframe for easy data transformation
+    df = pd.DataFrame(data, columns = columns)
+    print(df) # examine
+    print(df.columns)
+    # print(df['FIRST_NAME']) # example to extract a column
+    
 if choice == 5:
+    print("\n")
     cursor.execute("""
         SELECT h.hireNo, h.clientNo, h.firstName, h.lastName, h.model, h.make, v.carSize
         FROM HireAgreements h, Vehicles v
         WHERE (h.registrationNo = v.registrationNo) AND (v.carSize LIKE '%Mid-size%');
     """)
-
-# get column names from cursor
-columns = [c[0] for c in cursor.description]
-# fetch data
-data = cursor.fetchall()
-# bring data into a pandas dataframe for easy data transformation
-df = pd.DataFrame(data, columns = columns)
-print(df) # examine
-print(df.columns)
-# print(df['FIRST_NAME']) # example to extract a column
+    # get column names from cursor
+    columns = [c[0] for c in cursor.description]
+    # fetch data
+    data = cursor.fetchall()
+    # bring data into a pandas dataframe for easy data transformation
+    df = pd.DataFrame(data, columns = columns)
+    print(df) # examine
+    print(df.columns)
+    # print(df['FIRST_NAME']) # example to extract a column
 
